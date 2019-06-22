@@ -1,7 +1,8 @@
 #include <iostream>
 #include <fstream>
 
-#include "grafo.hpp"
+// #include "grafo.hpp"
+#include "solucao.hpp"
 
 using namespace std;
 
@@ -11,7 +12,6 @@ Grafo* leArquivo(string nomeArquivo) {
 
     int qtdElementos;
     arquivo >> qtdElementos;
-
     int aux;
     double **coordenadas = new double*[qtdElementos];
     for (int i = 0; i < qtdElementos; ++i) {
@@ -22,13 +22,6 @@ Grafo* leArquivo(string nomeArquivo) {
     }
     
     arquivo.close();
-
-    cout << "\n\nvertices e coordenadas\n\n";
-    for (int i = 0; i < qtdElementos; ++i) {
-        cout << i << " "
-             << coordenadas[i][0] << " "
-             << coordenadas[i][1] << endl;
-    }
     
     Grafo* grafo = new Grafo(qtdElementos, coordenadas);
     
@@ -37,7 +30,9 @@ Grafo* leArquivo(string nomeArquivo) {
 
 int main() {
     string nomeArquivo = "teste.txt";
-    leArquivo(nomeArquivo);
+    Grafo* grafo = leArquivo(nomeArquivo);
+
+    Solucao* solucao = new Solucao(grafo);
 
     return 0;
 }

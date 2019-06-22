@@ -15,11 +15,11 @@ class Grafo {
         Grafo(int qtdElementos, double **coordenadas);
         ~Grafo();
         
-        //~ // Desabilita Construtor de Cópia gerado pelo compilador
-        //~ Grafo(const Grafo &) = delete;
+        // Desabilita Construtor de Cópia gerado pelo compilador
+        Grafo(const Grafo &) = delete;
 
-        //~ // Desabilita Operador de Atribuição gerado pelo compilador
-        //~ Grafo &operator=(const Grafo &) = delete;
+        // Desabilita Operador de Atribuição gerado pelo compilador
+        Grafo &operator=(const Grafo &) = delete;
         
         int getQtdElementos();
         int getQtdArestas();
