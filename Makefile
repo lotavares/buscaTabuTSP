@@ -10,7 +10,7 @@ CXXFLAGS = -Wall -I. -DVART_OGL -DIL_LIB -std=c++11
 LDFLAGS = 
 LDLIBS = 
 
-OBJECTS = main.o grafo.o solucao.o
+OBJECTS = main.o grafo.o solucao.o buscaTabu.o
 
 # first, try to compile from this project
 %.o: %.cpp %.hpp
@@ -24,7 +24,7 @@ OBJECTS = main.o grafo.o solucao.o
 #~ %.o: vart/contrib/source/%.cpp vart/contrib/%.h
 #~ 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -o $@ -c $<
 
-$(APPLICATION): $(OBJECTS) main.o grafo.o solucao.o
+$(APPLICATION): $(OBJECTS) main.o grafo.o solucao.o buscaTabu.o
 	$(CXX) $(LDFLAGS) $^ $(LDLIBS) -o $@
 
 #gdb:

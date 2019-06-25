@@ -10,7 +10,7 @@ class Grafo {
         int qtdArestas;
         int **arestasElementos;
         double *arestasValor;
-        double** matrizAdjacencia;
+        double **matrizAdjacencia;
     public:
         Grafo(int qtdElementos, double **coordenadas);
         ~Grafo();

@@ -8,22 +8,22 @@ Solucao::Solucao(Grafo *grafo) {
     }
     matrizAdjacencia = grafo->getMatrizAdjacencia();
     somatorioTotal = 0;
-    this->solucao = solucaoInicial(grafo);
+    solucaoInicial(grafo);
 }
 
 Solucao::~Solucao() {
-
+    elementosForaDaRota.clear();
+    solucao.clear();
+    arestas.clear();
 }
 
-std::vector<int> Solucao::solucaoInicial(Grafo *grafo) {
+void Solucao::solucaoInicial(Grafo *grafo) {
     srand(time(NULL));
 
     int pos = rand() % qtdElementos;
 
     solucao.push_back(elementosForaDaRota[pos]);
     elementosForaDaRota.erase(elementosForaDaRota.begin() + pos);
-
-    std::cout << "\n\nqtdElementos: " << qtdElementos;
 
     int posDisponiveis = qtdElementos - 1, posAresta = 0;
     while (posDisponiveis > 0) {
@@ -41,12 +41,28 @@ std::vector<int> Solucao::solucaoInicial(Grafo *grafo) {
     arestas.push_back(matrizAdjacencia[solucao[posAresta]][solucao[0]]);
     somatorioTotal += arestas[posAresta];
 
-    std::cout << "\n\narestas: ";
+    std::cout << "\n\n----- Solucao inicial: -----\n";
+    imprimeSolucao();
+}
+
+void Solucao::buscaTabu() {
+    BuscaTabu *buscaTabu = new BuscaTabu(solucao, arestas, matrizAdjacencia);
+    buscaTabu->realizaBuscaTabu(solucao, arestas);
+
+    std::cout << "\n\n----- Solucao apos busca tabu: -----\n";
+    imprimeSolucao();
+}
+
+void Solucao::imprimeSolucao() {
+    std::cout << "\n\nRota: ";
+    for (unsigned int i = 0; i < solucao.size(); ++i) {
+        std::cout << solucao[i] << " ";
+    }
+    somatorioTotal = 0;
+    std::cout << "\n\nArestas: ";
     for (unsigned int i = 0; i < arestas.size(); ++i) {
         std::cout << arestas[i] << " ";
+        somatorioTotal += arestas[i];
     }
-
-    std::cout << "\n\nsomatorio total: " << somatorioTotal << "\n\n";
-
-    return solucao;
+    std::cout << "\n\nSomatorio total: " << somatorioTotal << "\n\n";
 }

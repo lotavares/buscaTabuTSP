@@ -1,12 +1,10 @@
 #include <iostream>
 #include <fstream>
-
-// #include "grafo.hpp"
 #include "solucao.hpp"
 
 using namespace std;
 
-Grafo* leArquivo(string nomeArquivo) {
+Grafo *leArquivo(string nomeArquivo) {
     ifstream arquivo;
     arquivo.open(nomeArquivo.c_str());
 
@@ -23,16 +21,17 @@ Grafo* leArquivo(string nomeArquivo) {
     
     arquivo.close();
     
-    Grafo* grafo = new Grafo(qtdElementos, coordenadas);
+    Grafo *grafo = new Grafo(qtdElementos, coordenadas);
     
     return grafo;
 }
 
 int main() {
     string nomeArquivo = "teste.txt";
-    Grafo* grafo = leArquivo(nomeArquivo);
+    Grafo *grafo = leArquivo(nomeArquivo);
 
-    Solucao* solucao = new Solucao(grafo);
+    Solucao *solucao = new Solucao(grafo);
+    solucao->buscaTabu();
 
     return 0;
 }
