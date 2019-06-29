@@ -42,18 +42,56 @@ void Solucao::solucaoInicial(Grafo *grafo) {
     somatorioTotal += arestas[posAresta];
 
     std::cout << "\n\n----- Solucao inicial: -----\n";
-    imprimeSolucao();
+    imprimeSolucao(somatorioTotal);
 }
 
 void Solucao::buscaTabu() {
     BuscaTabu *buscaTabu = new BuscaTabu(solucao, arestas, matrizAdjacencia);
-    buscaTabu->realizaBuscaTabu(solucao, arestas);
 
-    std::cout << "\n\n----- Solucao apos busca tabu: -----\n";
-    imprimeSolucao();
+    std::vector<int> solucaoMelhor = solucao;
+    std::vector<double> arestasMelhor = arestas;
+    double melhorSomatorio = somatorioTotal;
+
+    int i = 0;
+    bool melhorou = true;
+    while ((i < 5) and melhorou) {
+        double somatorioAux = somatorioTotal; 
+        buscaTabu->realizaBuscaTabu(solucao, arestas);
+
+        realizaSomatorio(somatorioTotal);
+
+        if (somatorioTotal < melhorSomatorio) {
+            solucaoMelhor = solucao;
+            arestasMelhor = arestas;
+            melhorSomatorio = somatorioTotal;
+        }
+        if (somatorioTotal == somatorioAux) {
+            melhorou = false;
+        }
+
+        ++i;
+    }
+
+    solucao = solucaoMelhor;
+    arestas = arestasMelhor;
+    somatorioTotal = melhorSomatorio;
+
+    solucaoMelhor.clear();
+    arestasMelhor.clear();
+    delete buscaTabu;
+
+    std::cout << "\n\n----- Melhor solucao encontrada -----\n";
+    imprimeSolucao(somatorioTotal);
 }
 
-void Solucao::imprimeSolucao() {
+void Solucao::realizaSomatorio(double &somatorioTotal) {
+    somatorioTotal = 0;
+    for (unsigned int i = 0; i < arestas.size(); ++i) {
+        somatorioTotal += arestas[i];
+    }
+}
+
+void Solucao::imprimeSolucao(double &somatorioTotal) {
     std::cout << "\n\nRota: ";
     for (unsigned int i = 0; i < solucao.size(); ++i) {
         std::cout << solucao[i] << " ";

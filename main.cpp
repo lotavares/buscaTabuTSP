@@ -27,11 +27,42 @@ Grafo *leArquivo(string nomeArquivo) {
 }
 
 int main() {
-    string nomeArquivo = "teste.txt";
+    string nomeArquivo = "bier127.txt";
+    cout << "\n\nNome do arquivo: " << nomeArquivo << "  "
+         << "\nQuantidade de vertices: " << 127 << "\n";
     Grafo *grafo = leArquivo(nomeArquivo);
-
     Solucao *solucao = new Solucao(grafo);
     solucao->buscaTabu();
 
+    nomeArquivo = "a280.txt";
+    cout << "\n\nNome do arquivo: " << nomeArquivo << "  "
+         << "\nQuantidade de vertices: " << 280 << "\n";
+    grafo = leArquivo(nomeArquivo);
+    solucao = new Solucao(grafo);
+    solucao->buscaTabu();
+
+    nomeArquivo = "lin318.txt";
+    cout << "\n\nNome do arquivo: " << nomeArquivo << "  "
+         << "\nQuantidade de vertices: " << 318 << "\n";
+    grafo = leArquivo(nomeArquivo);
+    solucao = new Solucao(grafo);
+    solucao->buscaTabu();
+
+    nomeArquivo = "att532.txt";
+    cout << "\n\nNome do arquivo: " << nomeArquivo << "  "
+         << "\nQuantidade de vertices: " << 532 << "\n";
+    grafo = leArquivo(nomeArquivo);
+    solucao = new Solucao(grafo);
+    solucao->buscaTabu();
+
+    nomeArquivo = "dsj1000.txt";
+    cout << "\n\nNome do arquivo: " << nomeArquivo << "  "
+         << "\nQuantidade de vertices: " << 1000 << "\n";
+    grafo = leArquivo(nomeArquivo);
+    solucao = new Solucao(grafo);
+    solucao->buscaTabu();
+
+    delete grafo;
+    delete solucao;
     return 0;
 }

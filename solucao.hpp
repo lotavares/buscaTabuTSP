@@ -19,7 +19,8 @@ class Solucao {
         Solucao(Grafo *grafo);
         ~Solucao();
         void buscaTabu();
-        void imprimeSolucao();
+        void realizaSomatorio(double &somatorioTotal);
+        void imprimeSolucao(double &somatorioTotal);
 };
 
 #endif
