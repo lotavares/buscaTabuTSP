@@ -11,3 +11,5 @@ Após o comando "make" no terminal, basta rodar o executável com "./main". Os r
 	- rota
 	- arestas
 	- somatório total da rota
+
+Copyright (c) 2019 Lorena Kerollen Botelho Tavares
