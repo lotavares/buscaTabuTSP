@@ -4,7 +4,7 @@ O Problema do Caixeiro Viajante (Traveling Salesman Problem - TSP) consiste em, 
 
 O TSP considerado para implementação é o TPS simétrico.
 
-O programa executa 5 instâncias utilizadas para teste, que se encontram na pasta *instancias*. As instâncias estão disponíveis em [TSPLIB](http://elib.zib.de/pub/mp-testdata/tsp/tsplib/tsplib.html), mas as utilizadas na execução têm algumas modicações.
+O programa executa 5 instâncias utilizadas para teste, que se encontram na pasta *instancias*. As instâncias estão disponíveis em [TSPLIB](http://elib.zib.de/pub/mp-testdata/tsp/tsplib/tsplib.html), mas as utilizadas na execução têm algumas modificações.
 
 O formato de instância aceita é:
 
