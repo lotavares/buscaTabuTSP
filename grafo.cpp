@@ -4,7 +4,6 @@
 
 using namespace std;
 
-// classe utilizada para armazenar o grafo
 Grafo::Grafo(int qtdElementos, double **coordenadas) {
     this->qtdElementos = qtdElementos;
     this->coordenadas = coordenadas;
@@ -21,7 +20,8 @@ Grafo::Grafo(int qtdElementos, double **coordenadas) {
         for (int j = i + 1; j < qtdElementos; ++j) {
             arestasElementos[pos][0] = i;
             arestasElementos[pos][1] = j;
-            arestasValor[pos] = sqrt(pow((coordenadas[j][0] - coordenadas[i][0]), 2) + pow((coordenadas[j][1] - coordenadas[i][1]), 2));
+            arestasValor[pos] = sqrt(pow((coordenadas[j][0] - coordenadas[i][0]), 2)
+                                + pow((coordenadas[j][1] - coordenadas[i][1]), 2));
 
             ++pos;
         }

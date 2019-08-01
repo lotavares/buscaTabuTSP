@@ -17,6 +17,7 @@ Solucao::~Solucao() {
     arestas.clear();
 }
 
+// A solução inicial utilizada foi a de Inserção Aleatória
 void Solucao::solucaoInicial(Grafo *grafo) {
     srand(time(NULL));
 
@@ -42,7 +43,7 @@ void Solucao::solucaoInicial(Grafo *grafo) {
     somatorioTotal += arestas[posAresta];
 
     std::cout << "\n\n----- Solucao inicial: -----\n";
-    imprimeSolucao(somatorioTotal);
+    imprimirSolucao(somatorioTotal);
 }
 
 void Solucao::buscaTabu() {
@@ -56,9 +57,9 @@ void Solucao::buscaTabu() {
     bool melhorou = true;
     while ((i < 5) and melhorou) {
         double somatorioAux = somatorioTotal; 
-        buscaTabu->realizaBuscaTabu(solucao, arestas);
+        buscaTabu->realizarBuscaTabu(solucao, arestas);
 
-        realizaSomatorio(somatorioTotal);
+        realizarSomatorio(somatorioTotal);
 
         if (somatorioTotal < melhorSomatorio) {
             solucaoMelhor = solucao;
@@ -81,17 +82,17 @@ void Solucao::buscaTabu() {
     delete buscaTabu;
 
     std::cout << "\n\n----- Melhor solucao encontrada -----\n";
-    imprimeSolucao(somatorioTotal);
+    imprimirSolucao(somatorioTotal);
 }
 
-void Solucao::realizaSomatorio(double &somatorioTotal) {
+void Solucao::realizarSomatorio(double &somatorioTotal) {
     somatorioTotal = 0;
     for (unsigned int i = 0; i < arestas.size(); ++i) {
         somatorioTotal += arestas[i];
     }
 }
 
-void Solucao::imprimeSolucao(double &somatorioTotal) {
+void Solucao::imprimirSolucao(double &somatorioTotal) {
     std::cout << "\n\nRota: ";
     for (unsigned int i = 0; i < solucao.size(); ++i) {
         std::cout << solucao[i] << " ";

@@ -26,7 +26,7 @@ int BuscaTabu::calculaNovoFimLista() {
     return (fimLista + 1) % (solucao.size() / 4);
 }
 
-void BuscaTabu::insereListaTabu(int vertice1, int vertice2, int pos1, int pos2) {
+void BuscaTabu::inserirNaListaTabu(int vertice1, int vertice2, int pos1, int pos2) {
     int novoFim = calculaNovoFimLista();
     listaTabu[fimLista][0] = 10;
     listaTabu[fimLista][1] = vertice1;
@@ -36,17 +36,17 @@ void BuscaTabu::insereListaTabu(int vertice1, int vertice2, int pos1, int pos2) 
     fimLista = novoFim;
 }
 
-void BuscaTabu::removeListaTabu() {
+void BuscaTabu::removerDaListaTabu() {
     if (inicioLista != fimLista) {
         inicioLista = (inicioLista + 1) % (solucao.size() / 4);
     }
 }
 
-void BuscaTabu::atualizaListaTabu() {
+void BuscaTabu::atualizarListaTabu() {
     for (int i = inicioLista; i < fimLista; ++i){
         --listaTabu[i][0];
         if (listaTabu[i][0] == 0) {
-            removeListaTabu();
+            removerDaListaTabu();
         }
     }
     
@@ -62,7 +62,7 @@ bool BuscaTabu::estaEmListaTabu(int vertice1, int vertice2, int pos1, int pos2) 
     return false;
 }
 
-void BuscaTabu::realizaBuscaTabu(std::vector<int> &solucao, std::vector<double> &arestas) {
+void BuscaTabu::realizarBuscaTabu(std::vector<int> &solucao, std::vector<double> &arestas) {
     optMove();
     swapVertice();
     solucao = this->solucao;
@@ -112,7 +112,7 @@ void BuscaTabu::swapVertice() {
     double rotaPossivel = matrizAdjacencia[solucao[0]][solucao[2]] + matrizAdjacencia[1][solucao[solucao.size() - 1]]
                         + matrizAdjacencia[solucao[0]][solucao[1]];
     if ((rotaPossivel < rotaAtual) and !estaEmListaTabu(solucao[0], solucao[1], 0, 1)) {
-        insereListaTabu(solucao[0], solucao[1], 0, 1);
+        inserirNaListaTabu(solucao[0], solucao[1], 0, 1);
         swapVerticeAux(0, 1);
     }
     for (unsigned int i = 2; i < (solucao.size() - 1); ++i) {
@@ -120,16 +120,16 @@ void BuscaTabu::swapVertice() {
         rotaPossivel = matrizAdjacencia[solucao[0]][solucao[i - 1]] + matrizAdjacencia[solucao[0]][solucao[i + 1]]
                      + matrizAdjacencia[solucao[i]][solucao[1]] + matrizAdjacencia[i][solucao[solucao.size() - 1]];
         if ((rotaPossivel < rotaAtual) and !estaEmListaTabu(solucao[0], solucao[i], 0, i)) {
-            insereListaTabu(solucao[0], solucao[i], 0, i);
+            inserirNaListaTabu(solucao[0], solucao[i], 0, i);
             swapVerticeAux(0, i);
-            atualizaListaTabu();
+            atualizarListaTabu();
         }
     }
     rotaAtual = arestas[0] + arestas[solucao[solucao.size() - 1]];
     rotaPossivel = matrizAdjacencia[solucao[0]][solucao[solucao.size() - 1]]
                  + matrizAdjacencia[solucao[solucao.size() - 1]][solucao[1]];
     if ((rotaPossivel < rotaAtual) and !estaEmListaTabu(solucao[0], solucao[solucao.size() - 1], 0, solucao.size() - 1)) {
-        insereListaTabu(solucao[0], solucao[solucao.size() - 1], 0, solucao.size() - 1);
+        inserirNaListaTabu(solucao[0], solucao[solucao.size() - 1], 0, solucao.size() - 1);
         swapVertices(0, solucao.size() - 1);
         arestas[0] = matrizAdjacencia[solucao[0]][solucao[1]];
     }
@@ -141,9 +141,9 @@ void BuscaTabu::swapVertice() {
         rotaPossivel = matrizAdjacencia[solucao[i - 1]][solucao[i + 1]] + matrizAdjacencia[solucao[i]][solucao[i + 1]]
                      + matrizAdjacencia[solucao[i]][solucao[i + 2]];
         if ((rotaPossivel < rotaAtual) and !estaEmListaTabu(solucao[i], solucao[i + 1], i, i + 1)) {
-            insereListaTabu(solucao[i], solucao[i + 1], i, i + 1);
+            inserirNaListaTabu(solucao[i], solucao[i + 1], i, i + 1);
             swapVerticeAux1(i, i + 1);
-            atualizaListaTabu();
+            atualizarListaTabu();
         }
 
         // para quando j > i + 1
@@ -152,9 +152,9 @@ void BuscaTabu::swapVertice() {
             rotaPossivel = matrizAdjacencia[solucao[i - 1]][solucao[j]] + matrizAdjacencia[solucao[j]][solucao[i + 1]]
                          + matrizAdjacencia[solucao[j - 1]][solucao[i]] + matrizAdjacencia[i][solucao[j + 1]];
             if ((rotaPossivel < rotaAtual) and !estaEmListaTabu(solucao[i], solucao[j], i, j)) {
-                insereListaTabu(solucao[i], solucao[j], i, j);
+                inserirNaListaTabu(solucao[i], solucao[j], i, j);
                 swapVerticeAux1(i, j);
-                atualizaListaTabu();
+                atualizarListaTabu();
             }
         }
 
@@ -164,9 +164,9 @@ void BuscaTabu::swapVertice() {
                      + matrizAdjacencia[solucao[solucao.size() - 2]][solucao[i]] + matrizAdjacencia[solucao[i]][solucao[0]];
 
         if ((rotaPossivel < rotaAtual) and !estaEmListaTabu(solucao[i], solucao[solucao.size() - 1], i, solucao.size() - 1)) {
-            insereListaTabu(solucao[i], solucao[solucao.size() - 1], i, solucao.size() - 1);
+            inserirNaListaTabu(solucao[i], solucao[solucao.size() - 1], i, solucao.size() - 1);
             swapVerticeAux2(i, solucao.size() - 1);
-            atualizaListaTabu();
+            atualizarListaTabu();
         }
     }
 }

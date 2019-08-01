@@ -5,6 +5,13 @@
 
 class BuscaTabu {
     private:
+        /* Matriz com (qtdVertices / 4) linhas e 5 colunas,
+        a coluna 0 sendo a quantidade de iteraçãos que aquele
+        movimento ainda permanecerá na lista, que começa em 10
+        para todos os movimentos, a coluna 1 é o vértice 1,
+        a coluna 2 é o vértice 2, a coluna 3 é a posição do vértice 1,
+        e a coluna 4 é a posição do vértice 2.
+        Apenas o movimento de troca de vértices utiliza a Lista Tabu. */
         int **listaTabu;
         int inicioLista;
         int fimLista;
@@ -15,9 +22,9 @@ class BuscaTabu {
         double **matrizAdjacencia;
 
         int calculaNovoFimLista();
-        void insereListaTabu(int vertice, int vertice2, int pos1, int pos2);
-        void removeListaTabu();
-        void atualizaListaTabu();
+        void inserirNaListaTabu(int vertice, int vertice2, int pos1, int pos2);
+        void removerDaListaTabu();
+        void atualizarListaTabu();
         bool estaEmListaTabu(int vertice1, int vertice2, int pos1, int pos2);
 
         void optMove();
@@ -31,7 +38,7 @@ class BuscaTabu {
     public:
         BuscaTabu(std::vector<int> &solucao, std::vector<double> &arestas, double **matrizAdjacencia);
         ~BuscaTabu();
-        void realizaBuscaTabu(std::vector<int> &solucao, std::vector<double> &arestas);
+        void realizarBuscaTabu(std::vector<int> &solucao, std::vector<double> &arestas);
 };
 
 #endif
