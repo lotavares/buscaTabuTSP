@@ -1,31 +1,31 @@
-### Busca Tabu para resolver o TSP
+### Tabu Search to Solve the TSP
 
-O Problema do Caixeiro Viajante (Traveling Salesman Problem - TSP) consiste em, dado um conjunto de *n* cidades com distâncias entre cada par de cidades, sair de um ponto inicial, encontrar o menor caminho para percorrer todas as cidades passando por cada uma apenas uma vez, e retornar para o ponto inicial ao final. A meta-heurística Busca Tabu foi utilizada para resolução do TSP. A versão utilizada na implementação do trabalho foi a básica, onde, além da Busca Local, há a adição da Lista Tabu, utilizada para impedir que a solução desfaça um movimento recentemente feito, impedindo que a busca caia em um ciclo. O espaço de busca contém apenas soluções factíveis, para a estrutura da vizinhança foi utilizada uma busca local contendo dois movimentos possíveis, o 2-opt move e a troca de vértices.
+The Traveling Salesman Problem (TSP) consists of, given a set of *n* cities with distances between each pair of cities, starting from an initial point, finding the shortest path to visit all cities passing through each city only once, and returning to the initial point at the end. The metaheuristic Tabu Search was used to solve the TSP. The version used in this implementation is the basic one, where, in addition to Local Search, there is the addition of the Tabu List, used to prevent undoing a recently made move, thus avoiding the search falling into a cycle. The search space contains only feasible solutions. For the neighborhood structure, a local search was used with two possible moves: the 2-opt move and vertex swap.
 
-O TSP considerado para implementação é o TPS simétrico.
+The TSP considered for the implementation is the symmetric TSP.
 
-O programa executa 5 instâncias utilizadas para teste, que se encontram na pasta *instancias*. As instâncias estão disponíveis em [TSPLIB](http://elib.zib.de/pub/mp-testdata/tsp/tsplib/tsplib.html), mas as utilizadas na execução têm algumas modificações.
+The program runs 5 instances used for testing, which are located in the *instancias* folder. The instances are available at [TSPLIB](http://elib.zib.de/pub/mp-testdata/tsp/tsplib/tsplib.html), but the ones used in the execution have some modifications.
 
-O formato de instância aceita é:
+The accepted instance format is:
 
-		<quantidadeDeVertices>
-		<vertice0> <coordenadaX0> <coordenadaY0>
-		<vertice1> <coordenadaX1> <coordenadaY1>
+		<numberOfVertices>
+		<vertex0> <coordinateX0> <coordinateY0>
+		<vertex1> <coordinateX1> <coordinateY1>
 		...
-e vai até o vértice *quantidadeDeVertices - 1*.
+and goes up to vertex `<numberOfVertices - 1>`.
 
-Após o comando *make* no terminal, basta rodar o executável com *./main*.
+After running the *make* command in the terminal, just run the executable with *./main*.
 
-Os resultados são impressos no terminal ao final da execução, e são eles:
+The results are printed in the terminal at the end of execution, and they are:
 
-- Nome do arquivo e quantidade de vértices
-- Solução inicial:
-	* rota
-	* arestas
-	* somatório total da rota
-- Solução após Busca Tabu:
-	* rota
-	* arestas
-	* somatório total da rota
+- File name and number of vertices
+- Initial solution:
+	* route
+	* edges
+	* total sum of the route
+- Solution after Tabu Search:
+	* route
+	* edges
+	* total sum of the route
 
 Copyright (c) 2019 Lorena Kerollen Botelho Tavares
